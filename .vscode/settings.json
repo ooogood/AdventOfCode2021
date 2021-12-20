@@ -1,8 +1,0 @@
-{
-	"files.associations": {
-		"*.h": "cpp",
-		"*.hpp": "cpp",
-		"valarray": "cpp",
-		"*.ipp": "cpp"
-	}
-}
