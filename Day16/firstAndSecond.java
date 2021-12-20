@@ -5,16 +5,10 @@ public class firstAndSecond {
 	private int cursor = 0;
 	public int verSum = 0;
 	public static void main( String args[] ) {
-		// firstAndSecond a = new firstAndSecond();
-		// a.foo();
-		// // for first part
-		// System.out.println( a.verSum );
-		Integer a = Integer.valueOf( 127 );
-		Integer b = Integer.valueOf( 127 );
-		boolean c = ( a == b );	// c = false
-		boolean d = a.equals( b ); // d = true
-		System.out.println( c );
-		System.out.println( d );
+		firstAndSecond a = new firstAndSecond();
+		a.foo();
+		// for first part
+		System.out.println( a.verSum );
 	}
 	public void foo() {
 		try {
