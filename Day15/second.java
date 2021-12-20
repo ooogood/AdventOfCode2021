@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class first {
+public class second {
 	private class Node implements Comparable<Node>{
 		public final int row;
 		public final int col;
@@ -20,14 +20,15 @@ public class first {
 		}
 		
 	}
-	private final int len = 100;
+	private final int unit = 100;
+	private final int len = unit * 5;
 	private Node mp[][];
 	private Set<Node> unsettled = new HashSet<Node>();
 	public static void main( String args[] ) {
-		first a = new first();
+		second a = new second();
 		a.foo();
 	}
-	public first() {
+	public second() {
 		mp = new Node[ len ][ len ];
 	}
 	public void foo() {
@@ -38,10 +39,15 @@ public class first {
 			int rowNum = 0;
 			while( sr.hasNextLine() ) {
 				String str = sr.nextLine();
-				for( int i = 0; i < len; ++i ) {
-					Node tmp = new Node( rowNum, i, str.charAt( i ) - '0' );
-					mp[ rowNum ][ i ] = tmp;
-					unsettled.add( tmp );
+				for( int i = 0; i < unit; ++i ) {
+					for( int j = 0; j < 5; ++j ) {
+						for( int k = 0; k < 5; ++k ) {
+							int cost = ( ( ( str.charAt( i ) - '0' ) - 1 + j + k ) % 9 ) + 1;
+							Node tmp = new Node( rowNum + j * unit, i + k * unit, cost );
+							mp[ rowNum + j * unit ][ i + k * unit ] = tmp;
+							unsettled.add( tmp );
+						}
+					}
 				}
 				rowNum++;
 			}
@@ -60,13 +66,19 @@ public class first {
 			updateNeighbor(cur, cur.row, cur.col - 1);
 			updateNeighbor(cur, cur.row, cur.col + 1);
 		}
-		// for( int i = 0; i < len; ++i ) {
-		// 	for( int j = 0; j < len; ++j ) {
-		// 		System.out.print( String.format( "%3d", mp[ i ][ j ].dist ) );
+		// // print debug
+		// try {
+		// 	FileWriter fw = new FileWriter( "cout.txt" );
+		// 	for( int i = 0; i < len; ++i ) {
+		// 		for( int j = 0; j < len; ++j ) {
+		// 			fw.write( String.format( "%4d", mp[ i ][ j ].cost ));
+		// 		}
+		// 		fw.write('\n');
 		// 	}
-		// 	System.out.println();
+		// 	fw.close();
 		// }
-		
+		// catch (Exception e ) {
+		// }
 		System.out.println( mp[ len - 1 ][ len - 1 ].dist );
 	}
 	private Node getSmallestUnsettled() {
